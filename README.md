@@ -346,7 +346,8 @@ spring.config.import=vault://
 spring.clound.vault.host:
 spring.clound.vault.port:
 spring.clound.vault.token:0000-0000-0000-0000
-``
+
+```
 
 spring.config.import=optional:configserver:http://server.com:9141
 
