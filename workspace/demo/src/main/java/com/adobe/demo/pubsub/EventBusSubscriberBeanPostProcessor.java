@@ -2,6 +2,7 @@ package com.adobe.demo.pubsub;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
@@ -17,6 +18,8 @@ public class EventBusSubscriberBeanPostProcessor implements BeanPostProcessor {
 //    }
 
     // constructor DI, no need for @Autowired
+
+    @Lazy
     public EventBusSubscriberBeanPostProcessor(EventBus eventBus) {
         this.eventBus = eventBus;
     }

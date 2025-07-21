@@ -296,6 +296,79 @@ Sample code for implementing Pub-Sub model.
 
 Check :Guava EventBus within a Spring Boot application for ready to use pub-sub
 
+  @Lazy makes sure an proxy object is created instead of actual one.
+  Actual instance is created only if we start using it.
+
+=============
+
+Spring Boot 3.5 improvements in reading environment variables.
+
+Older way:
+
+```
+ 
+    @Value("{DRIVER}")
+    String driver;
+    @Value("{URL}")
+    String url;
+    AppConfig
+        ComboPooledDataSource cpds = new ComboPooledDataSource();
+        cpds.setDriverClass( driver); //loads the jdbc driver
+        cpds.setJdbcUrl( url );
 
 
+```
 
+New way in Spring Boot 3.5 -- database credentials, API keys, token variables can be stored in environment variables, ConfigServer, Docker, Kubernetes, Vault making it more secure and dynamic
+
+Example:
+```
+Set Environment Variables:
+in terminal:
+
+export DATABASE_CONFIG="
+ DB_URL=jdbc:h2:mem:testdb
+ DB_DRIVER=org.h2.Driver
+ "
+ % echo $DATABASE_CONFIG
+
+application.properties
+spring.config.import=env:DATABASE_CONFIG
+
+ ./mvnw spring-boot:run
+
+```
+
+https://developer.hashicorp.com/vault
+
+```
+spring.config.import=vault://
+spring.clound.vault.host:
+spring.clound.vault.port:
+spring.clound.vault.token:0000-0000-0000-0000
+``
+
+spring.config.import=optional:configserver:http://server.com:9141
+
+===========================
+
+Spring Shell CLI
+
+```
+
+<dependency>
+            <groupId>org.springframework.shell</groupId>
+            <artifactId>spring-shell-starter</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+
+@ShellComponent and @ShellMethod
+
+shell:>hello
+Hello World
+shell:>bye
+Bye User!!!
+shell:>exit
+
+
+```
