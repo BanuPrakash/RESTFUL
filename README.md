@@ -253,5 +253,18 @@ public class EmployeeRepoDbImpl implements EmployeeRepo {
 * Instantiation
 * Populate Properties: Inject dependencies
 
-Resume @ 11:15
+./mvnw dependency:tree
+
+
+@SpringBootApplication in 3 in 1:
+1) @Configuration
+2) @ComponentScan
+ defaults to scan "com.adobe.demo" and sub packages for annotations like @Component, @Repository,..
+3) @EnableAutoConfiguration --> for out of the box configurations like Embedded Tomcat Servlet Container
+
+SpringApplication.run() creates a spring container and initializes it
+Spring Container can be accessed using BeanFactory or ApplicationContext 
+
+Prefer below one if application is reading ENVIRONMENT varaiables
+./mvnw spring-boot:run
 
