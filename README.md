@@ -251,4 +251,7 @@ public class EmployeeRepoDbImpl implements EmployeeRepo {
 5) @ConditionalOnProperty
 
 * Instantiation
-* Populate Properties: Inject depedencies
+* Populate Properties: Inject dependencies
+
+Resume @ 11:15
+
