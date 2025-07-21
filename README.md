@@ -75,8 +75,27 @@ Spring Framework uses metadata -- XML or Annotation
 
 Spring instantiates classes which has one of these annotations at class level:
 * @Component
-* @Repository
+* @Repository: exception transalation
+https://github.com/spring-projects/spring-framework/blob/main/spring-jdbc/src/main/resources/org/springframework/jdbc/support/sql-error-codes.xml
+```
+    try {
+
+        // Code
+    } catch(SQLException ex) {
+        // for MySQL
+        if(ex.getErrorCode() == 1062) {
+            thrown new DuplicateKeyException(....);
+        }
+         // for Oracle
+        if(ex.getErrorCode() == 1) {
+            thrown new DuplicateKeyException(....);
+        }
+    }
+
+```
+
 * @Service
+Transactional facade over Repository and Business logic
 * @Configuration
 * @Controller
 * @RestController
@@ -115,8 +134,121 @@ Spring boot 3x is built on top of Spring Framework 6
 ```
 
 interface EmployeeRepo {
-    
+    void addEmployee(Employee e);
+}
+
+@Repository
+public class EmployeeRepoDbImpl implements EmployeeRepo {
+    public void addEmployee(Employee e) {
+        ...
+    }
+}
+
+@Service
+public class AppService {
+    @Autowired
+    private EmployeeRepo employeeRepo; // no tight coupling
+
+    public void doTask(Employee e) {
+        employeeRepo.addEmployee(e);
+    }
 }
 
 
 ```
+
+Issue - Required a single bean, instead found 2 beans
+
+```
+@Primary
+@Repository
+public class EmployeeRepoMongoImpl implements EmployeeRepo {
+    public void addEmployee(Employee e) {
+        ...
+    }
+}
+
+```
+
+Solutions :
+1) @Primary
+
+```
+
+@Primary
+@Repository
+public class EmployeeRepoMongoImpl implements EmployeeRepo {
+
+@Repository
+public class EmployeeRepoDbImpl implements EmployeeRepo {
+
+
+ @Autowired
+    private EmployeeRepo employeeRepo; Wiring of employeeRepoMongoImpl is done
+```
+
+2) @Qualifer
+ 
+```
+   Note: remove @Primary
+
+   @Repository
+    public class EmployeeRepoMongoImpl implements EmployeeRepo {
+
+    @Repository
+    public class EmployeeRepoDbImpl implements EmployeeRepo { 
+
+    
+    @Service
+    public class AppService {
+    @Qualifer("employeeRepoMongoImpl")
+        @Autowired
+        private EmployeeRepo employeeRepo; 
+
+     @Service
+    public class AdminService {
+        @Qualifer("employeeRepoDbImp")
+        @Autowired
+        private EmployeeRepo employeeRepo; 
+
+```
+
+3) @Profile
+
+```
+@Profile("prod")
+@Repository
+public class EmployeeRepoMongoImpl implements EmployeeRepo {
+
+@Profile("dev")
+@Repository
+public class EmployeeRepoDbImpl implements EmployeeRepo {
+
+
+     @Service
+    public class AdminService {
+        @Autowired
+        private EmployeeRepo employeeRepo;  // Base on Profile dev or prod
+```
+
+4) @ConditionalOnMissingBean
+
+```
+@Repository
+public class EmployeeRepoMongoImpl implements EmployeeRepo {
+
+@ConditionalOnMissingBean("employeeRepoMongoImpl")
+@Repository
+public class EmployeeRepoDbImpl implements EmployeeRepo {
+
+
+     @Service
+    public class AdminService {
+        @Autowired
+        private EmployeeRepo employeeRepo; 
+
+```
+5) @ConditionalOnProperty
+
+* Instantiation
+* Populate Properties: Inject depedencies
