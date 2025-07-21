@@ -6,7 +6,7 @@ Full Stack Architect, Corporate Trainer
 Co-founder & CTO: Lucida Technologies Pvt Ltd.,
 Email: banuprakashc@yahoo.co.in; banuprakash.cr@gmail.com;
 https://www.linkedin.com/in/banu-prakash-50416019/
-https://github.com/BanuPrakash/CJ
+https://github.com/BanuPrakash/RESTFUL
 
 ===================================
 
@@ -53,4 +53,70 @@ bash terminal> mysql -u "root" -p
 mysql> exit
 
 ```
+Contents to Cover:
+* Spring and Spring Boot Framework introduction
+* RESTful WS with Spring Data JPA / ORM 
+* AOP
+* Exception Handling and Validation
+* Unit Testing
+* Caching
+* HATEOAS
+* ASYNC
+* Security
+* MicroServices
 
+==========================
+
+Spring Framework: provides a Container to support life cycle management of beans and wiring.
+
+Bean: any object managed by Spring framework
+
+Spring Framework uses metadata -- XML or Annotation
+
+Spring instantiates classes which has one of these annotations at class level:
+* @Component
+* @Repository
+* @Service
+* @Configuration
+* @Controller
+* @RestController
+* @ControllerAdvice
+* @ShellComponent
+
+Spring also uses Factory method to instantiate
+* @Bean
+
+Wiring:
+* Field level or setter injection using @Autowired
+* Constructor Dependency Injection
+
+Spring Framework --> Inversion Of Control to acheive Dependency Injection
+* Loose Coupling application
+* Easy to test
+
+```
+
+UI --> Service --> Repository --> Database 
+
+UI <-- Service <-- Repository <-- Database 
+
+```
+
+Spring Boot framework is built on top of Spring Framework: Highly Opiniated framework
+* Lots of configuration comes out of the box
+1) If we are using RDBMS --> Database Connection pool is configured out of box
+If we are using ORM --> Hiberante is configured [Toplink / KODO / JDO / OpenJPA ...]
+2) If we are building Web application
+a) Embedded Tomcat container is configured [jetty / netty / .. are alternates]
+b) Java to JSON, JSON to Java conversion is configured to use Jackson library [ Jettison / GSON / Moxy ..]
+
+Spring boot 3x is built on top of Spring Framework 6
+
+```
+
+interface EmployeeRepo {
+    
+}
+
+
+```
