@@ -1,9 +1,13 @@
 package com.adobe.demo;
 
+import com.adobe.demo.pubsub.CustomEvent;
+import com.adobe.demo.pubsub.EventBus;
 import com.adobe.demo.service.AppService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+
+import java.util.Date;
 
 @SpringBootApplication
 public class DemoApplication {
@@ -13,6 +17,11 @@ public class DemoApplication {
         // get from container
         AppService appService = context.getBean("appService", AppService.class);
         appService.doTask();
+
+        EventBus eventBus = (EventBus) context.getBean("eventBus", EventBus.class);
+        eventBus.postMessage(new CustomEvent("First Message", new Date()));
+        eventBus.postMessage(new CustomEvent("Second Message", new Date()));
+
     }
 
 }

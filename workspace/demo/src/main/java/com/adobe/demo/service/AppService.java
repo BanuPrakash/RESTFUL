@@ -1,13 +1,16 @@
 package com.adobe.demo.service;
 
 import com.adobe.demo.repo.EmployeeRepo;
+import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
 
 @Service
-public class AppService {
+public class AppService  implements BeanNameAware {
+
     @Autowired
     private EmployeeRepo employeeRepo;
 
@@ -23,5 +26,10 @@ public class AppService {
         }
 
         employeeRepo.addEmployee();
+    }
+
+    @Override
+    public void setBeanName(String name) {
+        System.out.println("Name set to " + name);
     }
 }

@@ -250,8 +250,6 @@ public class EmployeeRepoDbImpl implements EmployeeRepo {
 ```
 5) @ConditionalOnProperty
 
-* Instantiation
-* Populate Properties: Inject dependencies
 
 ./mvnw dependency:tree
 
@@ -278,6 +276,26 @@ Factory method: @Bean
 * Object creation is complex
 
 https://www.mchange.com/projects/c3p0/
+
+
+========
+
+Spring Bean Life Cycle:
+* Instantiation
+* Populate Properties: Inject dependencies; using @Autowired or Constructor DI
+* Aware interface: BeanNameAware, BeanFactoryAware
+BeanNameAware: Typical usage for logging purpose
+BeanFactoryAware: can used to integrate spring bean with legacy code
+* BeanPostProcessors -> Pre Initialization and Post Initialization
+Use case --> Custom initialization logic.
+
+Sample code for implementing Pub-Sub model.
+
+* Publisher publishes an event
+* Subscribes has to subscribe for a type of event
+
+Check :Guava EventBus within a Spring Boot application for ready to use pub-sub
+
 
 
 

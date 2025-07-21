@@ -9,7 +9,7 @@ import javax.sql.DataSource;
 @Configuration
 public class AppConfig {
     // factory method
-    @Bean
+    @Bean("h2")
     public DataSource getDataSource() throws Exception{
         ComboPooledDataSource cpds = new ComboPooledDataSource();
         cpds.setDriverClass( "org.h2.Driver" ); //loads the jdbc driver
@@ -21,4 +21,17 @@ public class AppConfig {
         cpds.setMaxPoolSize(20);
         return cpds;
     }
+
+//    @Bean("oracle")
+//    public DataSource getDataSourceOracle() throws Exception{
+//        ComboPooledDataSource cpds = new ComboPooledDataSource();
+//        cpds.setDriverClass( "org.h2.Driver" ); //loads the jdbc driver
+//        cpds.setJdbcUrl( "jdbc:h2:mem:testdb" );
+//        cpds.setUser("sa");
+//        cpds.setPassword("password");
+//        cpds.setMinPoolSize(5);
+//        cpds.setAcquireIncrement(5);
+//        cpds.setMaxPoolSize(20);
+//        return cpds;
+//    }
 }
