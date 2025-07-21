@@ -268,3 +268,16 @@ Spring Container can be accessed using BeanFactory or ApplicationContext
 Prefer below one if application is reading ENVIRONMENT varaiables
 ./mvnw spring-boot:run
 
+resources/application.properties
+spring.profiles.active=dev
+
+===================
+
+Factory method: @Bean
+* Using 3rd party classes in Spring framework; they don't have @Component, @Service, .. annotation on those classes
+* Object creation is complex
+
+https://www.mchange.com/projects/c3p0/
+
+
+
