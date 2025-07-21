@@ -1,7 +1,7 @@
 # Building RESTful WS using Spring Boot 3.5
 
 ```
-Banuprakash C
+Banu Prakash C
 Full Stack Architect, Corporate Trainer
 Co-founder & CTO: Lucida Technologies Pvt Ltd.,
 Email: banuprakashc@yahoo.co.in; banuprakash.cr@gmail.com;
