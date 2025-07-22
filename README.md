@@ -440,3 +440,21 @@ New Spring Boot application:
 3) Spring Data JPA for Hibernate and JPA
 
 CommandLineRunner is a Spring interface used to execute code after the Spring application context is fully initialized
+
+https://docs.spring.io/spring-boot/appendix/application-properties/index.html
+
+1) spring.jpa.hibernate.ddl-auto=create
+create tables when application starts; drop them when application terminates
+good for testing purpose only
+
+2) spring.jpa.hibernate.ddl-auto=verify
+map entities to existing tables; don't create new tables or alter them
+good for Bottom to Top approach
+
+3) spring.jpa.hibernate.ddl-auto=update
+map to existing tables; if tables are not present create tables;
+if required alter tables like size of column; insert new column
+Good for Top Down approach
+
+Settings: Build, Execution, Deployment, Compiler, Annotation Processor
+select orderapp --> Obtain Processor from project classpath
