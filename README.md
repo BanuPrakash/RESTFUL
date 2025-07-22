@@ -439,3 +439,4 @@ New Spring Boot application:
 2) mysql for JDBC
 3) Spring Data JPA for Hibernate and JPA
 
+CommandLineRunner is a Spring interface used to execute code after the Spring application context is fully initialized
