@@ -433,3 +433,9 @@ mysql> use DB_REST;
 mysql> create table products (id int PRIMARY KEY AUTO_INCREMENT, name VARCHAR(100), price double, qty int);
 
 ```
+
+New Spring Boot application:
+1) lombok for Code generation
+2) mysql for JDBC
+3) Spring Data JPA for Hibernate and JPA
+
