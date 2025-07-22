@@ -458,3 +458,73 @@ Good for Top Down approach
 
 Settings: Build, Execution, Deployment, Compiler, Annotation Processor
 select orderapp --> Obtain Processor from project classpath
+
+==============
+
+RESTful Web Services
+
+```
+<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+
+Including this dependency we get:
+1) Embedded Tomcat Servlet Container [ alternates are Jetty / Netty / ..]
+2) jackson library for Java <--> JSON [ GSON / Jettison / Moxy]
+3) micrometer --> Observability
+4) spring-webmvc module
+Settings: Build, Execution, Deployment, Compiler, Annotation Processor
+select orderapp --> Obtain Processor from project classpath
+
+./mvnw dependency:tree
+
+ org.springframework.boot:spring-boot-starter-web:jar:3.5.3:compile
+[INFO] |  +- org.springframework.boot:spring-boot-starter-json:jar:3.5.3:compile
+[INFO] |  |  +- com.fasterxml.jackson.core:jackson-databind:jar:2.19.1:compile
+[INFO] |  |  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.19.1:compile
+[INFO] |  |  |  \- com.fasterxml.jackson.core:jackson-core:jar:2.19.1:compile
+[INFO] |  |  +- com.fasterxml.jackson.datatype:jackson-datatype-jdk8:jar:2.19.1:compile
+[INFO] |  |  +- com.fasterxml.jackson.datatype:jackson-datatype-jsr310:jar:2.19.1:compile
+[INFO] |  |  \- com.fasterxml.jackson.module:jackson-module-parameter-names:jar:2.19.1:compile
+[INFO] |  +- org.springframework.boot:spring-boot-starter-tomcat:jar:3.5.3:compile
+[INFO] |  |  +- org.apache.tomcat.embed:tomcat-embed-core:jar:10.1.42:compile
+[INFO] |  |  +- org.apache.tomcat.embed:tomcat-embed-el:jar:10.1.42:compile
+[INFO] |  |  \- org.apache.tomcat.embed:tomcat-embed-websocket:jar:10.1.42:compile
+[INFO] |  +- org.springframework:spring-web:jar:6.2.8:compile
+[INFO] |  |  \- io.micrometer:micrometer-observation:jar:1.15.1:compile
+[INFO] |  |     \- io.micrometer:micrometer-commons:jar:1.15.1:compile
+[INFO] |  \- org.springframework:spring-webmvc:jar:6.2.8:compile
+[INFO] |     \- org.springframework:spring-expression:jar:6.2.8:compile
+
+```
+REST --> Representation State Transfer --> Architectural pattern --> Roy Feilding in 2000
+
+Resource --> things which you can name. present on the server like file, image, database, printer
+Representation --> state of resource at a given point of time
+ContentNegotionanHandler --> different formats of representation based on client sent HTTP Header Accept
+
+REST API
+URL to identify a resource
+HTTP methods to perform CRUD
+
+GET -- READ
+POST -- CREATE a new resource
+PUT/PATCH/JSON-PATCH -- for updating
+DELETE -- for deleting
+
+Guiding Principles of REST:
+1) client-server: concerns has to be seperated
+2) Uniform Indentifier
+3) Stateless
+4) Layered
+5) Cacheable
+
+Spring MVC architecture gives you DispatcherServlet as Front Controller, which intercepts all HTTP requests
+
+uses HandlerMappings to map URI to @Controller or @RestController
+@Controller is for traditional web applications where server is going to send rendered pages like pdf / html/ images
+@RestController sends different formats of data representation like XML / JSON / CSV ..
+
+
+

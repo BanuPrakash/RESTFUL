@@ -1,0 +1,14 @@
+### @name="get all products"
+GET http://localhost:8080/api/products
+Accept: application/json
+
+### @name="add a new Product"
+POST http://localhost:8080/api/products
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "LG AC",
+  "price": 45000.00,
+  "quantity": 100
+}
