@@ -546,5 +546,11 @@ http://localhost:8080/api/products?low=5000&high=25000
 
 
 
+Task:
+1) CustomerRepo for CRUD operations on Customer
+2) Wire CustomerRepo to OrderService
+3) CustomerController -> wire OrderService
+handle GET and POST
+
 
 
