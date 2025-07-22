@@ -33,4 +33,8 @@ public class OrderService {
     public long productCount() {
         return productRepo.count();
     }
+
+    public List<Product> byRange(double low, double high) {
+        return productRepo.findByPriceBetween(low, high);
+    }
 }

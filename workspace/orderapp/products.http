@@ -2,6 +2,16 @@
 GET http://localhost:8080/api/products
 Accept: application/json
 
+
+### @name="get product by id"
+GET http://localhost:8080/api/products/3
+Accept: application/json
+
+### name = "get by range"
+GET http://localhost:8080/api/products?low=500&high=25000
+Accept: application/json
+
+
 ### @name="add a new Product"
 POST http://localhost:8080/api/products
 Accept: application/json

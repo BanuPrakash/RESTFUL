@@ -526,5 +526,24 @@ uses HandlerMappings to map URI to @Controller or @RestController
 @Controller is for traditional web applications where server is going to send rendered pages like pdf / html/ images
 @RestController sends different formats of data representation like XML / JSON / CSV ..
 
+https://developer.uber.com/docs/eats/references/api/v2/get-eats-stores-storeid-menu
+
+
+Use Path Parameters for Singular resource [ / ]
+http://api.example.com/device-management/managed-devices/{device-id}
+http://api.example.com/user-management/users/{id}
+
+use Query Parameters [ ? ] for subset
+Paginate
+http://localhost:8080/api/products?page=1&size=10 
+
+Products by Range
+http://localhost:8080/api/products?low=5000&high=25000
+
+
+
+
+
+============
 
 
