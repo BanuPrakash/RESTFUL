@@ -1,0 +1,13 @@
+### @name="Place Order"
+
+POST http://localhost:8080/api/orders
+Accept: text/plain
+Content-Type: application/json
+
+{
+    "customer" : {"email": "roger@adobe.com"},
+    "items": [
+        {"product": {"id": 1}, "qty": 5},
+        {"product": {"id": 3}, "qty" :1}
+    ]
+}

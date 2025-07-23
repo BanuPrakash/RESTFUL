@@ -44,6 +44,7 @@ public class EmployeeController {
     @PatchMapping("/{id}")
     public  Employee patchMapping(@PathVariable("id") int id, @RequestBody JsonPatch patch) throws Exception{
         ObjectMapper mapper = new ObjectMapper();
+        // employee read from DB
         var target = patch.apply(mapper.readTree(mapper.writeValueAsString(employee)));
         return mapper.treeToValue(target, Employee.class); // JSONNode to Employee
     }

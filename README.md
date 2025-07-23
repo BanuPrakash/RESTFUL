@@ -592,5 +592,68 @@ JSON Patch is a standard format for describing changes to a JSON document.
 
 
 
+```
+ mysql> insert into customers values ('roger@adobe.com', 'Roger' , 'Smith');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into customers values ('geetha@adobe.com', 'Geetha' , 'Mohan');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into customers values ('rita@adobe.com', 'Rita' , 'Jones');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from customers;
+
+```
+
+https://martinfowler.com/bliki/BoundedContext.html
+
+
+ @JoinColumn(name="customer_fk") used with ManyToOne introduces foreign key in owning table/entity [orders]
+
+ @JoinColumn(name="order_fk") used with OneToMany introduces foreign key in child table [items]
+
+Assume one order has 4 items;
+
+```
+
+    @OneToMany
+    @JoinColumn(name="order_fk")
+    private List<LineItem> items = new ArrayList<>(); // order has many items
+
+    Place an order:
+    orderRepo.save(order);
+    itemRepo.save(i1);
+    itemRepo.save(i2);
+    itemRepo.save(i3);
+    itemRepo.save(i4);
+
+    Delete order:
+    orderRepo.delete(order);
+    itemRepo.delete(i1);
+    itemRepo.delete(i2);
+    itemRepo.delete(i3);
+    itemRepo.delete(i4);
+
+```
+
+With Cascade: for composition and not aggregation relationship
+
+```
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="order_fk")
+    private List<LineItem> items = new ArrayList<>(); // order has many items
+
+     Place an order:
+     orderRepo.save(order); // saves orders and 4 line items
+
+        Delete order:
+        orderRepo.delete(order); // delete order and its 4 line items
+```
+
+Within a @Transactional boundary if entity becomes dirty /change -> ORMs will send UPDATE SQL
+
+
 
 
