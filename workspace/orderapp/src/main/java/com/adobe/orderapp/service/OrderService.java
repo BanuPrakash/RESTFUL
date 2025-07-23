@@ -1,5 +1,6 @@
 package com.adobe.orderapp.service;
 
+import com.adobe.orderapp.dto.OrderReport;
 import com.adobe.orderapp.entity.LineItem;
 import com.adobe.orderapp.entity.Order;
 import com.adobe.orderapp.entity.Product;
@@ -22,6 +23,10 @@ public class OrderService {
 
     public List<Order> getOrders() {
         return  orderRepo.findAll();
+    }
+
+    public  List<OrderReport> getReport() {
+        return  orderRepo.getReport();
     }
 
     // Atomic - Unit of Work
