@@ -654,6 +654,18 @@ With Cascade: for composition and not aggregation relationship
 
 Within a @Transactional boundary if entity becomes dirty /change -> ORMs will send UPDATE SQL
 
+failed to lazily initialize a collection of role: com.adobe.orderapp.entity.Order.items
 
+By default ManyToOne is EAGER fetching 
+fetchong Order gets Customer also
 
+and OneToMany is Lazy fetching
+fetching orders doesn't get items
 
+By default
+spring.jpa.open-in-view=true
+
+Connection / Hibernate Session is kept alive, hence lazy loading is possible
+
+spring.jpa.open-in-view=false
+Connection / Hibernate Session is closed once repo method is executed, when children objects are required by client it tries to fetch them [ lazy] but connection is lost ant throws LazyInitializationException 

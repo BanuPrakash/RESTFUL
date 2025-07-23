@@ -20,6 +20,10 @@ public class OrderService {
     private final ProductRepo productRepo;
     private final OrderRepo orderRepo;
 
+    public List<Order> getOrders() {
+        return  orderRepo.findAll();
+    }
+
     // Atomic - Unit of Work
     @Transactional
     public String placeOrder(Order order) {

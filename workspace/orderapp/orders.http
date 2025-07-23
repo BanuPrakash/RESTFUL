@@ -7,7 +7,11 @@ Content-Type: application/json
 {
     "customer" : {"email": "roger@adobe.com"},
     "items": [
-        {"product": {"id": 1}, "qty": 5},
-        {"product": {"id": 3}, "qty" :1}
+        {"product": {"id": 2}, "qty": 50}
     ]
 }
+
+### @name="Get Orders"
+
+GET http://localhost:8080/api/orders
+Accept: application/json
