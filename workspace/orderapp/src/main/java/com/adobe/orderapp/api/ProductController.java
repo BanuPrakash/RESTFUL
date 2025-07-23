@@ -58,4 +58,12 @@ public class ProductController {
     public Product updateProductPricePut(@PathVariable("id") int id, @RequestBody Product p) {
         return service.modifyProductPrice(id, p.getPrice());
     }
+
+    // DELETE http://localhost:8080/api/products/3
+    // Accept: text/ plain
+    @DeleteMapping("/{id}")
+    public String doDelete(@PathVariable("id") int id) {
+        //
+        return  "Product deleted!!!";
+    }
 }

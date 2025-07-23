@@ -583,6 +583,14 @@ if any exception --> rollback
 PATCH for partial updates -- query parameter for data
 PUT for major update -- new data generally is sent as payload
 
+====
+
+https://zuplo.com/blog/2024/10/10/unlocking-the-power-of-json-patch
+https://jsonpatch.me/
+
+JSON Patch is a standard format for describing changes to a JSON document.
+
+
 
 
 

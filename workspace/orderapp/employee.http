@@ -1,0 +1,9 @@
+PATCH http://localhost:8080/api/employees/123
+Content-Type: application/json-patch+json
+
+[
+  {"op": "replace", "path":  "/title", "value":  "Team Lead"},
+  {"op":  "remove", "path":  "/personalInfo/phone"},
+  {"op": "add", "path":  "/personalInfo/email", "value": "harry@gmail.com"},
+  {"op":  "add", "path":  "/programmingSkills/1", "value" :  "AWS"}
+]
