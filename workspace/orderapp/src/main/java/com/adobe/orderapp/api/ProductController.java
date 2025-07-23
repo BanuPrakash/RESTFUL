@@ -5,6 +5,7 @@ import com.adobe.orderapp.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.service.annotation.PatchExchange;
 
 import java.util.List;
 
@@ -37,5 +38,24 @@ public class ProductController {
     @ResponseStatus(HttpStatus.CREATED)
     public Product addProduct(@RequestBody Product product) {
         return  service.addProduct(product);
+    }
+
+    // PATCH http://localhost:8080/api/products/3?price=5350
+    @PatchMapping("/{id}")
+    public Product updateProductPrice(@PathVariable("id") int id, @RequestParam("price") double price) {
+        return service.modifyProductPrice(id, price);
+    }
+
+    // PUT http://localhost:8080/api/products/3
+    /*
+        {
+            "price": 5350,
+            "quantity": 98
+        }
+
+     */
+    @PutMapping("/{id}")
+    public Product updateProductPricePut(@PathVariable("id") int id, @RequestBody Product p) {
+        return service.modifyProductPrice(id, p.getPrice());
     }
 }

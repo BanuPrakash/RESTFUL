@@ -22,3 +22,7 @@ Content-Type: application/json
   "price": 45000.00,
   "quantity": 100
 }
+
+### @name="update product price"
+PATCH http://localhost:8080/api/products/3?price=5350
+Accept: application/json

@@ -552,5 +552,37 @@ Task:
 3) CustomerController -> wire OrderService
 handle GET and POST
 
+============
+
+@Controller [ Server Side rendering ] and @RestController [ Client side rendering ]
+
+HandlerMapping, DispatcherServlet, Jackson library for java to JSON and JSON to java conversion
+@GetMapping, @PostMapping, @RequestMapping, @PathVariable, @RequestParam 
+
+JpaRepository --> most of the methods required for CRUD operations are generated.
+We can also write custom Projection in interface
+Implementation classes are generated [ @Repository ] 
+
+@Service acts as a facade over Repoistory and Business logic
+
+JpaRepository doesn't provide methods for Update; we need to write our own or use Dirty Checking
+
+=======
+
+Day 3:
+@Modifying -> executeUpdate()
+
+In JDBC, executeQuery() and executeUpdate() are methods used to execute SQL queries. executeQuery() is specifically designed for SELECT statements, returning a ResultSet containing the query results. executeUpdate() is used for INSERT, UPDATE, and DELETE statements, returning the number of rows affected by the operation as an integer. 
+
+
+for all built-in JPARepository methods like save() and delete AUTO Commit is set to true
+for custom methods we need to put @Transactional to commit;
+@Transactional method --> no exception is propagated from the method --> commit
+if any exception --> rollback
+
+PATCH for partial updates -- query parameter for data
+PUT for major update -- new data generally is sent as payload
+
+
 
 

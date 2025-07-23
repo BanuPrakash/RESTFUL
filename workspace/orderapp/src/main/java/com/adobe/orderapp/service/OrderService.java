@@ -2,6 +2,7 @@ package com.adobe.orderapp.service;
 
 import com.adobe.orderapp.entity.Product;
 import com.adobe.orderapp.repo.ProductRepo;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -36,5 +37,11 @@ public class OrderService {
 
     public List<Product> byRange(double low, double high) {
         return productRepo.findByPriceBetween(low, high);
+    }
+
+    @Transactional
+    public Product modifyProductPrice(int id, double price) {
+        productRepo.updatePrice(id, price);
+        return  getProductById(id);
     }
 }

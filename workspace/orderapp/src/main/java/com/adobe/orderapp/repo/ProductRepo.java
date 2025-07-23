@@ -2,6 +2,9 @@ package com.adobe.orderapp.repo;
 
 import com.adobe.orderapp.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -17,4 +20,13 @@ public interface ProductRepo extends JpaRepository<Product, Integer> {
     List<Product> findByPriceGreaterThanAndQuantity(double price, int quantity);
 
     List<Product> findByPriceBetween(double low, double high);
+
+
+//    @Query("from Product where price >= :l and price <= :h")
+    @Query(value = "select * from products where price >= :l and price <= :h" , nativeQuery = true)
+    List<Product> byRange(@Param("l") double low, @Param("h") double high);
+
+    @Modifying
+    @Query("update Product  set price = :pr where id = :id")
+    void updatePrice(@Param("id") int id, @Param("pr") double price);
 }
