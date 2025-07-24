@@ -4,6 +4,7 @@ import com.adobe.orderapp.aop.Tx;
 import com.adobe.orderapp.entity.Product;
 import com.adobe.orderapp.service.EntityNotFoundException;
 import com.adobe.orderapp.service.OrderService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +40,7 @@ public class ProductController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public Product addProduct(@RequestBody Product product) {
+    public Product addProduct(@RequestBody @Valid Product product) {
         return  service.addProduct(product);
     }
 
