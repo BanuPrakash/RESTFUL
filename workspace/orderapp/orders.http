@@ -5,13 +5,18 @@ Accept: text/plain
 Content-Type: application/json
 
 {
-    "customer" : {"email": "roger@adobe.com"},
+    "customer" : {"email": "geetha@adobe.com"},
     "items": [
-        {"product": {"id": 2}, "qty": 50}
+        {"product": {"id": 2}, "qty": 1},
+        {"product": {"id":  1}, "qty":  2}
     ]
 }
 
 ### @name="Get Orders"
 
 GET http://localhost:8080/api/orders
+Accept: application/json
+
+### @name="get orders by date"
+GET http://localhost:8080/api/orders?order-date=2025-07-23
 Accept: application/json

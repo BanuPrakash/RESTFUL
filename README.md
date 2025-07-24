@@ -669,3 +669,64 @@ Connection / Hibernate Session is kept alive, hence lazy loading is possible
 
 spring.jpa.open-in-view=false
 Connection / Hibernate Session is closed once repo method is executed, when children objects are required by client it tries to fetch them [ lazy] but connection is lost ant throws LazyInitializationException 
+
+==============
+
+Recap:
+PUT / PATCH
+JSON-PATCH: op : add, remove, replace
+[
+    {"op": "replace", "path": "/items/8/qty" , value:"2"}
+]
+```
+
+{
+    "oid": 5,
+    "orderDate": "2025-07-24T03:35:43.002+00:00",
+    "customer": {
+      "email": "geetha@adobe.com",
+      "firstName": "Geetha",
+      "lastName": "Mohan"
+    },
+    "items": [
+      {
+        "itemid": 8,
+        "product": {
+          "id": 2,
+          "name": "Sony Bravia",
+          "price": 297000.0,
+          "quantity": 49
+        },
+        "qty": 1,
+        "amount": 297000.0
+      },
+      {
+        "itemid": 9,
+        "product": {
+          "id": 1,
+          "name": "iPhone 16",
+          "price": 89000.0,
+          "quantity": 87
+        },
+        "qty": 2,
+        "amount": 178000.0
+      }
+
+```
+
+* OneToMany [cascade, EAGER vs LAZY]
+* ManyToOne
+
+@Transactional --> Atomic operation / Unit of Work
+DIRTY CHECKING --> Within PersistenceContext if entity becomes dirty --> ORM will flush the state to database by issuing UPDATE SQL
+
+JPQL Projections
+SQL vs JPQL 
+
+===========
+
+Day 4:
+
+HttpMessageConvertor are available for all primitive data types in Spring.
+String --> int, boolean, long, double, float, char
+Not available for Date type

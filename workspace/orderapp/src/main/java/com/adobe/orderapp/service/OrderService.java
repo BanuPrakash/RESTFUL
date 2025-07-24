@@ -10,13 +10,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.interceptor.TransactionInterceptor;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class OrderService {
+
     // Constructor DI, no need for @Autowired
     private final ProductRepo productRepo;
     private final OrderRepo orderRepo;
@@ -27,6 +30,10 @@ public class OrderService {
 
     public  List<OrderReport> getReport() {
         return  orderRepo.getReport();
+    }
+
+    public List<Order> getOrdersByDate(Date d) {
+        return orderRepo.getOrderForGivenDate(d);
     }
 
     // Atomic - Unit of Work
