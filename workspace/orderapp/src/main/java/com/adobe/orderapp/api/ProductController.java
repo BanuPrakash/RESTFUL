@@ -1,5 +1,6 @@
 package com.adobe.orderapp.api;
 
+import com.adobe.orderapp.aop.Tx;
 import com.adobe.orderapp.entity.Product;
 import com.adobe.orderapp.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ public class ProductController {
     // GET http://localhost:8080/api/products
     // Query Parameter
     // GET http://localhost:8080/api/products?low=5000&high=25000
+    @Tx
     @GetMapping()
     public List<Product> getProducts(@RequestParam(name = "low", defaultValue = "0.0") double low,
                                      @RequestParam(name = "high", defaultValue = "0.0") double high ) {

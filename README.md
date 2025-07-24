@@ -730,3 +730,15 @@ Day 4:
 HttpMessageConvertor are available for all primitive data types in Spring.
 String --> int, boolean, long, double, float, char
 Not available for Date type
+
+AOP: Aspect Oriented Programming: Modular Code
+to eliminate Cross Cutting Concerns which lead to code tangling and code scattering
+Cross-cutting concerns are functionalities that are needed in multiple parts of a software application, but don't fit neatly into the core business logic of any specific module. 
+
+Logging, Security, Profile, Transaction, Cache management, ...
+
+Aspect: a concern which leads to code tangling and code scattering like LogAspect, TransactionAspect,..
+JoinPoint: a place in your code where aspect can be weaved; methods and exceptions [eligible]
+Pointcut: selected joinpoint 
+Advice: how it's weaved; Before, After, Around, AfterThrowing, AfterReturning
+
