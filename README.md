@@ -742,3 +742,11 @@ JoinPoint: a place in your code where aspect can be weaved; methods and exceptio
 Pointcut: selected joinpoint 
 Advice: how it's weaved; Before, After, Around, AfterThrowing, AfterReturning
 
+==============
+
+A 404 status code, often displayed as "404 Not Found," is an HTTP status code that indicates the server cannot find the requested resource
+
+GlobalExceptionHandler:
+@ControllerAdvice is a AfterThrowing Advice which handles exceptions propagated from @Controller or @RestController
+
+

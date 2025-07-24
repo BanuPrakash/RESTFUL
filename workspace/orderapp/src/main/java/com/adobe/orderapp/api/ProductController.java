@@ -2,6 +2,7 @@ package com.adobe.orderapp.api;
 
 import com.adobe.orderapp.aop.Tx;
 import com.adobe.orderapp.entity.Product;
+import com.adobe.orderapp.service.EntityNotFoundException;
 import com.adobe.orderapp.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -32,7 +33,7 @@ public class ProductController {
 
     // GET http://localhost:8080/api/products/2
     @GetMapping("/{pid}")
-    public Product getProductById(@PathVariable("pid") int id) {
+    public Product getProductById(@PathVariable("pid") int id) throws EntityNotFoundException{
         return  service.getProductById(id);
     }
 
@@ -44,7 +45,7 @@ public class ProductController {
 
     // PATCH http://localhost:8080/api/products/3?price=5350
     @PatchMapping("/{id}")
-    public Product updateProductPrice(@PathVariable("id") int id, @RequestParam("price") double price) {
+    public Product updateProductPrice(@PathVariable("id") int id, @RequestParam("price") double price) throws EntityNotFoundException {
         return service.modifyProductPrice(id, price);
     }
 
@@ -57,7 +58,7 @@ public class ProductController {
 
      */
     @PutMapping("/{id}")
-    public Product updateProductPricePut(@PathVariable("id") int id, @RequestBody Product p) {
+    public Product updateProductPricePut(@PathVariable("id") int id, @RequestBody Product p) throws EntityNotFoundException{
         return service.modifyProductPrice(id, p.getPrice());
     }
 

@@ -38,7 +38,7 @@ public class OrderService {
 
     // Atomic - Unit of Work
     @Transactional
-    public String placeOrder(Order order) {
+    public String placeOrder(Order order) throws EntityNotFoundException {
         double total = 0.0;
         // {"product": {"id": 3}, "qty": 2}
         List<LineItem> items = order.getItems();
@@ -70,12 +70,12 @@ public class OrderService {
         return productRepo.findAll();
     }
 
-    public Product getProductById(int id) {
+    public Product getProductById(int id) throws EntityNotFoundException {
         Optional<Product> opt = productRepo.findById(id);
         if(opt.isPresent()) {
             return  opt.get();
         }
-        return null;
+        throw  new EntityNotFoundException("Product with id : " + id + " doesn't exist");
     }
 
     public long productCount() {
@@ -87,7 +87,7 @@ public class OrderService {
     }
 
     @Transactional
-    public Product modifyProductPrice(int id, double price) {
+    public Product modifyProductPrice(int id, double price) throws EntityNotFoundException{
         productRepo.updatePrice(id, price);
         return  getProductById(id);
     }
