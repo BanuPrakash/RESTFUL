@@ -789,3 +789,49 @@ BindingResult is an interface which dictates how the object that stores the resu
 i18n
 
 ```
+
+Caching:
+1) Client level
+Cache-Control: max-age=3600
+ETag -- Entity Tag
+
+ETag generally is generated using HashCode or Version
+
+
+2) Database level
+EHCache
+Swarm Cache
+
+3) REST API
+
+Caching
+```
+ <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+
+By default ConcurrentMapCache is available, we can modify to use Redis ,,,
+
+@Configuration
+@EnableCaching
+public class AppConfig {
+}
+
+@Cacheable(value = "productCache", key = "#id")
+@CachePut(value = "productCache", key = "#id")
+
+Avoid this, instead schedule to evict
+@CacheEvict(value = "productCache", key = "#id")
+
+@Configuration
+@EnableCaching
+@EnableScheduling
+public class AppConfig {
+}
+
+
+https://spring.io/blog/2020/11/10/new-in-spring-5-3-improved-cron-expressions
+
+```
+

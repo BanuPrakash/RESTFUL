@@ -39,3 +39,18 @@ Accept-Language: fr-FR
 ### @name="update product price"
 PATCH http://localhost:8080/api/products/3?price=5350
 Accept: application/json
+
+
+### @name="Etag request"
+GET http://localhost:8080/api/products/etag/3
+Accept: application/json
+
+### @name="Etag request cached"
+GET http://localhost:8080/api/products/etag/3
+Accept: application/json
+If-None-Match: "-511349071"
+
+
+### @name="Etag request"
+GET http://localhost:8080/api/products/cache/3
+Accept: application/json
