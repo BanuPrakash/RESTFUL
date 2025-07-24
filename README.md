@@ -835,3 +835,56 @@ https://spring.io/blog/2020/11/10/new-in-spring-5-3-improved-cron-expressions
 
 ```
 
+
+Task Vehicle Rental Application:
+
+```
+customers
+email            | fname  | lname |
++------------------+--------+-------+
+| geetha@adobe.com | Geetha | Mohan |
+| rita@adobe.com   | Rita   | Jones |
+| roger@adobe.com  | Roger  | Smith |
++------------------+--------+-------+
+
+vehicles
+
+can create and populate in backend
+
+reg_no      | type | cost_per_day | fuel_type
+KA04124
+UP09AC123
+
+
+rental
+id | customer_fk | vechicle_fk | rented_start_date | return_date
+
+
+Use case 1: rent a vehicle
+POST method
+id | customer_fk        | vechicle_fk | rented_start_date | return_date
+1   rita@adobe.com         UP09AC123    23-JUL-2025          NULL
+
+Use case 2: return a vehcile
+Use PUT/PATCH
+PATCH http://localhost:8080/api/rental/1
+
+Take system date and update return date
+USe Dirty checking
+
+Modify to take return date as QueryParam or request body
+
+docker run --name some-redis -p 6379:6379 -d redis
+
+ <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+ </dependency>
+
+spring.data.redis.host=localhost
+spring.data.redis.port=6379
+
+
+NodeJS Redis client:
+npx redis-commander
+```
