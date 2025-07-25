@@ -1201,3 +1201,4 @@ companyWithDepartmentsAndEmployeesGraph
         company0_.id=?
 ```
 
+JpaSpecification for filtering --> Custom
