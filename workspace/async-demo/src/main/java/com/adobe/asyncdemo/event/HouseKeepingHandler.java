@@ -10,6 +10,12 @@ public class HouseKeepingHandler {
     @EventListener
     @Async
     public void processHouseKeeping(PatientDischargeEvent event) {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         System.out.println(Thread.currentThread() + " : " + " house keeping service " + event.getName());
+        // can return result to Kafka / Kinesis stream /Redis
     }
 }

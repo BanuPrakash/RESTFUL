@@ -916,3 +916,49 @@ will be event listeners
 @EnableAsync --> to specify that we are using Spring specific Thread pools; By default if we don't create thread pools; out of the box Spring provides a default thread pool
 
 @Async --> code runs on a seperate thread; not using Tomcat / server thread
+
+https://jsonplaceholder.typicode.com/users
+
+https://jsonplaceholder.typicode.com/posts
+
+Restful clients:
+1) RestTemplate
+2) WebClient
+3) RestClient
+
+RestTemplate and RestClient are both tools in the Spring Framework for making synchronous HTTP requests to consume RESTful services. While they serve a similar purpose, RestClient is a newer, more modern alternative introduced in Spring Framework 6.1, designed to address some limitations and improve the developer experience compared to RestTemplate.
+
+```
+        String url = "http://localhost:8080/products/{id}";
+        Long productId = 1L;
+        Product product = restTemplate.getForObject(url, Product.class, productId);
+        System.out.println("Retrieved Product: " + product.getName());
+
+    @GetExchange
+    List<User> getUsers();
+
+    vs
+
+         RestTemplate restTemplate = new RestTemplate();
+        String url = "http://localhost:8080/users"; // Your API endpoint
+
+        ParameterizedTypeReference<List<User>> responseType = 
+        new ParameterizedTypeReference<List<User>>() {};
+
+        ResponseEntity<List<User>> responseEntity = restTemplate.exchange(
+            url,
+            HttpMethod.GET,
+            null, // No request body or headers needed for a simple GET
+            responseType
+        );
+
+        return responseEntity.getBody();
+```
+
+Apache Benchmark:
+ ab -n 32 -c 18 http://localhost:8080/api/posts
+
+brew install hey
+ hey -n 32 -c 18 http://localhost:8080/api/posts
+
+
