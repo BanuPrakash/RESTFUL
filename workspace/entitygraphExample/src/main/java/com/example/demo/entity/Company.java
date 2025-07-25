@@ -57,7 +57,8 @@ import javax.persistence.OneToMany;
                 attributeNodes = {@NamedAttributeNode(value = "departments", subgraph = "departmentsWithEmployeesAndOffices")},
                 subgraphs = @NamedSubgraph(
                         name = "departmentsWithEmployeesAndOffices",
-                        attributeNodes = {@NamedAttributeNode("employees"), @NamedAttributeNode("offices")}))
+                        attributeNodes = {@NamedAttributeNode("employees"),
+								@NamedAttributeNode("offices")}))
 })
 public class Company {
 	 @Id
@@ -66,7 +67,7 @@ public class Company {
 
 	    private String name;
 
-	    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
+	    @OneToMany(mappedBy = "company", fetch = FetchType.EAGER)
 	    private Set<Department> departments = new HashSet<>();
 
 	    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)

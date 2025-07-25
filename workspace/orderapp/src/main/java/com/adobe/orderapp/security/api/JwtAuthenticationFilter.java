@@ -36,7 +36,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         //||
         //                !StringUtils.startsWithIgnoreCase("authHeader", "Bearer")
         if(ObjectUtils.isEmpty(authHeader) ) {
-            filterChain.doFilter(request, response);
+            filterChain.doFilter(request, response); // UsernamePasswordAuthenticationFilter
             return;
         }
         jwt = authHeader.substring(7);
