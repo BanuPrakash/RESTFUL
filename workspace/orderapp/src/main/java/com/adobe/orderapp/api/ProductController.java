@@ -10,12 +10,17 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.concurrent.ConcurrentMapCache;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.service.annotation.PatchExchange;
 
 import java.util.List;
+
+import  static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import  static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.afford;
+import  static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("api/products")
@@ -26,7 +31,7 @@ public class ProductController {
     // Query Parameter
     // GET http://localhost:8080/api/products?low=5000&high=25000
     @Tx
-    @Cacheable(value = "productCache", key = "products")
+//    @Cacheable(value = "productCache", key = "products")
     @GetMapping()
     public List<Product> getProducts(@RequestParam(name = "low", defaultValue = "0.0") double low,
                                      @RequestParam(name = "high", defaultValue = "0.0") double high ) {
@@ -41,6 +46,20 @@ public class ProductController {
     @GetMapping("/{pid}")
     public Product getProductById(@PathVariable("pid") int id) throws EntityNotFoundException{
         return  service.getProductById(id);
+    }
+
+    //http://localhost:8080/api/products/hateoas/3
+    @GetMapping("/hateoas/{pid}")
+    public EntityModel<Product> getProductByIdHateoas(@PathVariable("pid") int id) throws EntityNotFoundException{
+        Product p =  service.getProductById(id);
+        EntityModel<Product> em = EntityModel.of(p,
+            linkTo(methodOn(ProductController.class).getProductByIdHateoas(id)).withSelfRel()
+                    .andAffordance(afford(methodOn(ProductController.class).updateProductPrice(id, 0.0)))
+                    .andAffordance(afford(methodOn(ProductController.class).addProduct(null))),
+                linkTo(methodOn(ProductController.class).getProducts(0,0)).withRel("products")
+        );
+
+        return em;
     }
 
     // GET http://localhost:8080/api/products/cache/2

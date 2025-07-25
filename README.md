@@ -961,4 +961,75 @@ Apache Benchmark:
 brew install hey
  hey -n 32 -c 18 http://localhost:8080/api/posts
 
+==========================================
+
+Observability and Monitoring
+
+Observability: is the ability to measure the internal state of a system by its external outputs [ logs, metrics and traces]
+
+* Tells whu=y a system is at fault
+
+Micrometer is included by default in Spring boot. It defines concepts like meters, rate aggregation , gauge and timers
+
+```
+    <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+
+management.endpoints.web.exposure.include=*
+
+http://localhost:8080/actuator
+
+http://localhost:8080/actuator/metrics/
+
+http://localhost:8080/actuator/metrics/http.server.requests
+
+Counter: simple incrementing metrics
+http://localhost:8080/actuator/metrics/posts.counter
+
+Timers: duration of event
+http://localhost:8080/actuator/metrics/posts.timer
+
+Gauges: to get size of collection / cache
+
+Prometheus and Grafana 
+
+```
+
+https://martinfowler.com/articles/richardsonMaturityModel.html
+
+HATEOAS : HyperText As The Extension Of Application State. --> Level 3 signifies a truly RESTful API. 
+
+WebMvcLinkBuilder
+RepresentationModel --> EntityModel and CollectionModel
+EntityModel: entity + links
+CollectionModel : collection + links
+
+```
+<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-hateoas</artifactId>
+</dependency>
+
+Affordance, in the context of design and psychology, refers to the perceived and actual properties of an object that suggest how it can be used. 
+@EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL_FORMS)
+
+```
+
+Spring Data REST: built on top of Spring data repositories like Spring Data JPA / Spring Data MongoRepo;
+based on Repo methods it creates endpoints.
+No need for explicit writing of @RestController
+
+good for inventory sort of applications without business logic
+
+Application: lombok, jpa, mysql, web, rest repositories [Spring Data REST]
+
+http://localhost:8080/products/search/findByQuantity?quantity=100
+
+http://localhost:8080/products/search/byRange?l=100&h=5000
+
+
+BasePathAwareController instead of RestController can be used to customize endpoints
 
