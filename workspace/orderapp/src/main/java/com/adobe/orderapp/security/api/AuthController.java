@@ -18,13 +18,13 @@ public class AuthController {
     private  final AuthenticationService service;
 
     @PostMapping("/register")
-    public JwtTokenResponse register(@RequestBody SignUpRequest request) {
+    public String register(@RequestBody SignUpRequest request) {
         System.out.println("Entered!!!");
-        return new JwtTokenResponse(service.signup(request));
+        return service.signup(request);
     }
 
     @PostMapping("/login")
-    public JwtTokenResponse login(@RequestBody SignInRequest request) {
-        return new JwtTokenResponse(service.signIn(request));
+    public String login(@RequestBody SignInRequest request) {
+        return  service.signIn(request);
     }
 }

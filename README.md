@@ -1058,3 +1058,97 @@ provides Authentication and Authorization support out of the box.
 
 spring.sql.init.mode=always --> runs schema.sql followed by data.sql -- for intialization
 
+Note: RESTful has to stateless; no Conversational state -- no usage of JESESSIONID and cookies
+
+Solution: use Tokens
+JSON Web Token (JWT) is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. 
+
+On Authentication Server creates JWT and sends to client as header or payload
+
+for every request from client JWT has to be sent by the client.
+
+```
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30
+
+HEADER
+{
+  "alg": "HS256",
+  "typ": "JWT"
+}
+PAYLOAD contains claims
+{
+    "sub":"banu@gmail.com",
+    "authorities": "ADMIN", "MANAGER",
+    "iat": 52424511,
+    "exp": 52451134,
+    "iss":"https://security.adobe.com"
+}
+
+SIGNATURE
+HMACSHA256(
+  base64UrlEncode(header) + "." +
+  base64UrlEncode(payload),
+  a-string-secret-at-least-256-bits-long)
+
+
+Client has to pass:
+Authorization: Bearer <<token>>
+```
+
+Many to Many
+
+```
+    aid | name              | gender
+    1     John Travolta
+    2     Bruce W
+
+    class Actor {
+
+    }
+
+    mid | name          | genre | release_date | length
+    1    Pulp Fiction
+    2    SFF
+
+    class Movie {
+        @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+     @JoinTable(name="MOVIES_ACTORS",
+         joinColumns = {
+            @JoinColumn(name="MID_FK")},
+            inverseJoinColumns = {@JoinColumn(name="AID_FK")}
+    )
+    private Set<Role> roles;
+    }
+    
+    movies_actors
+    mid_FK | aid_FK
+    1       1
+    1       2
+    2       1
+
+```
+
+entity , dto , repo
+
+Register:
+
+http://localhost:8080/auth/register
+
+payload of user with roles
+
+AuthController -> AuthenticationService -- UserDao signup for registration
+
+login:
+http://localhost:8080/auth/login
+PAYLOAD
+AuthController -> AuthenticationService -  authenticationManager.authenticate(user/passwrod)
+jwtService.generateToken(user); 
+
+============
+
+Access Protected Resources:
+http://localhost:8080/api/products
+Accept: application/json
+Authorization: Bearer <<token>>
+
