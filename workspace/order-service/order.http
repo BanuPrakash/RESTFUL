@@ -1,0 +1,14 @@
+### @name="place order"
+
+POST http://localhost:8081/api/order
+Accept: application/json
+Content-Type: application/json
+
+{
+"id": 113,
+"payment": {
+    "id": 113,
+    "paymentToken":"415252252333",
+    "amount": 5000.00
+}
+}

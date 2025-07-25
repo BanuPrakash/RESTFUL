@@ -888,3 +888,31 @@ spring.data.redis.port=6379
 NodeJS Redis client:
 npx redis-commander
 ```
+
+Day 5
+
+Asynchrouns operations in Spring Container
+server.tomcat.threads.max=150
+
+Scenario: Hospital Patient Discharge 
+
+Synchronous code -- blocking
+```
+    public String dischargePatient(String id, String name) {
+        billingService.processBill(id);
+        medicalService.updateHistory(id); //starvation
+        houseKeepingService.cleanAndAssign(); // starvation
+        notificationService.notify(id); // starvation
+        return "done";
+    }
+
+```
+
+Solution : Spring Application Event
+
+dischargePatient() will generate an Event; BillingService, MedicalService, houseKeeptingSErvice ,,,
+will be event listeners
+
+@EnableAsync --> to specify that we are using Spring specific Thread pools; By default if we don't create thread pools; out of the box Spring provides a default thread pool
+
+@Async --> code runs on a seperate thread; not using Tomcat / server thread

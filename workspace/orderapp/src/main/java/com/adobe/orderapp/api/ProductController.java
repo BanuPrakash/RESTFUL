@@ -26,6 +26,7 @@ public class ProductController {
     // Query Parameter
     // GET http://localhost:8080/api/products?low=5000&high=25000
     @Tx
+    @Cacheable(value = "productCache", key = "products")
     @GetMapping()
     public List<Product> getProducts(@RequestParam(name = "low", defaultValue = "0.0") double low,
                                      @RequestParam(name = "high", defaultValue = "0.0") double high ) {
