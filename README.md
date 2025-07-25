@@ -1033,3 +1033,26 @@ http://localhost:8080/products/search/byRange?l=100&h=5000
 
 BasePathAwareController instead of RestController can be used to customize endpoints
 
+======
+
+Spring Security
+
+provides Authentication and Authorization support out of the box.
+* build spring web 
+
+```
+  <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+  </dependency>
+
+  By including above dependency   Security module is active
+  1) all resources are protected
+  2) one user is created with username ="user" and password is generated
+  Using generated security password: 7b89d24c-a5f5-4da5-8c80-51d5ae794e78
+  3) login page
+  4) logout page
+    http://localhost:8080/logout
+    
+```
+
