@@ -1056,3 +1056,5 @@ provides Authentication and Authorization support out of the box.
     
 ```
 
+spring.sql.init.mode=always --> runs schema.sql followed by data.sql -- for intialization
+
